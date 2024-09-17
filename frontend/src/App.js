@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
 import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
@@ -69,13 +70,23 @@ function App() {
 
   const result = filteredData(products, selectedCategory, query);
 
-  return (
-    <>
-      <Sidebar handleChange={handleChange} />
-      <Navigation query={query} handleInputChange={handleInputChange} />
-      <Recommended handleClick={handleClick} />
-      <Products result={result} />
-    </>
+return (
+    <Router>
+      <Routes>
+        <Route path="*" element={<Navigate to="/product" />} />
+        <Route
+          path="/product"
+          element={
+            <>
+              <Sidebar handleChange={handleChange} />
+              <Navigation query={query} handleInputChange={handleInputChange} />
+              <Recommended handleClick={handleClick} />
+              <Products result={result} />
+            </>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
