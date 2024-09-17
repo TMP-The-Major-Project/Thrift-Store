@@ -1,11 +1,7 @@
-runb:
-	@cd backend && make run
+down:
+	sudo docker-compose down
 
-buildb:
-	@cd backend && make build
+up:
+	sudo docker-compose up --force-recreate --no-deps --remove-orphans -d
 
-runf:
-	@cd frontend && make start
-
-buildf:
-	@cd frontend && make build
+start: down up
