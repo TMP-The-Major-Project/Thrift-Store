@@ -2,6 +2,6 @@ down:
 	sudo docker-compose down
 
 up:
-	sudo docker-compose up --build --pull --force-recreate -d
+	sudo docker-compose up --build --abort-on-container-exit --force-recreate -d
 
 start: down up
