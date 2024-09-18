@@ -7,5 +7,7 @@
 - Ria Chawak - ![Ria Chawak](https://github.com/Ria1424)
 
 [Code of Conduct](.github/CODE_OF_CONDUCT.md)
+<br/>
 [Contributing Guide](.github/CONTRIBUTING.md)
+<br/>
 [Security Policy](.github/SECURITY.md)
