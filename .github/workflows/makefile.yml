@@ -8,17 +8,19 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y docker docker-compose
-      
-    - name: Install dependencies
-      run: make
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    - name: Run Build 
-      run: make build
+    - name: Set up Docker
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y docker.io docker-compose
+        sudo systemctl start docker
+        sudo systemctl enable docker
+
+    - name: Build Docker image
+      run: |
+        make build
