@@ -5,3 +5,7 @@
 - Niraj Lalani - ![Niraj Lalani](https://github.com/nirajlalani)
 - Jayesh Thakkar - ![Jayesh Thakkar](https://github.com/jayeshthakkar)
 - Ria Chawak - ![Ria Chawak](https://github.com/Ria1424)
+
+[Code of Conduct](.github/CODE_OF_CONDUCT.md)
+[Contributing Guide](.github/CONTRIBUTING.md)
+[Security Policy](.github/SECURITY.md)
