@@ -6,8 +6,12 @@
 - Jayesh Thakkar - ![Jayesh Thakkar](https://github.com/jayeshthakkar)
 - Ria Chawak - ![Ria Chawak](https://github.com/Ria1424)
 
-[Code of Conduct](.github/CODE_OF_CONDUCT.md)
+
+## Code of Conduct
+[You can read the complete Code of Conduct here](.github/CODE_OF_CONDUCT.md)
 <br/>
-[Contributing Guide](.github/CONTRIBUTING.md)
+## Contributing Guide
+[You can read the complete Contributing Guide here](.github/CONTRIBUTING.md)
 <br/>
-[Security Policy](.github/SECURITY.md)
+## Security Policy
+[You can read the complete Security Policy here](.github/SECURITY.md)
