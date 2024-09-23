@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
+import SignUp from "./Valdiate/SignUp";
 import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
 import products from "./db/data";
@@ -73,7 +74,7 @@ function App() {
 return (
     <Router>
       <Routes>
-        <Route path="*" element={<Navigate to="/product" />} />
+        {/* <Route path="*" element={<Navigate to="/product" />} /> */}
         <Route
           path="/product"
           element={
@@ -85,6 +86,15 @@ return (
             </>
           }
         />
+        <Route
+          path="/sign-up" 
+          element={
+            <>
+              <SignUp/>
+            </>
+          }
+        />
+
       </Routes>
     </Router>
   );
