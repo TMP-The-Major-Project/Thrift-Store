@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
-import SignUp from "./Valdiate/SignUp";
+import SignUp from "./Valdiate/SignUp"
 import Login from "./Valdiate/Login"
 import Navigation from "./Navigation/Nav";
 import Products from "./Products/Products";
