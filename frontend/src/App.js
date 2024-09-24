@@ -75,7 +75,7 @@ function App() {
 return (
     <Router>
       <Routes>
-        {/* <Route path="*" element={<Navigate to="/product" />} /> */}
+        <Route path="/" element={<Navigate to="/sign-up" />} />
         <Route
           path="/product"
           element={

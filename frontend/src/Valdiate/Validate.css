@@ -1,11 +1,11 @@
-body{
+.v_body{
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.card{
+.v_card{
     background: #f3fffe;
     display: flex;
     /* grid-template-columns: 1fr 1fr; */
@@ -33,7 +33,7 @@ input{
     outline: none;
 }
 
-.error{
+.v_error{
     font-family: sans-serif;
     color: red;
 }

@@ -21,47 +21,59 @@ function SignUp(){
     function SignUp(e){
         e.preventDefault()
 
+        var check=1
         if (username.length > 5){
             setErrorUserName("")
             setUserColor("green")
+            check = 1;
         } else{
             setErrorUserName("Username must be 5 letters long")
             setUserColor("red")
+            check = 0;
         }
 
 
         if (email.includes("@gmail.com")){
             setErrorEmail("")
             setEmailColor("green")
+            check = 1;
         } else{
             setErrorEmail("Email must contain @gmail.com")
             setEmailColor("red")
+            check = 0;
         }
 
 
         if (password.length > 8){
             setErrorPassword("")
             setPasswordColor("green")
+            check = 1;
         } else{
             setErrorPassword("Password must be 8 letters long")
             setPasswordColor("red")
+            check = 0;
         }
 
 
         if(password!=="" && password===confirmPassword){
             setErrorConfirmPassword("")
             setConfirmPasswordColor("green")
+            check = 1;
         } else{
             setErrorConfirmPassword("Password does not match")
             setConfirmPasswordColor("red")
+            check = 0;
         }
 
-
+        if (check===1){
+            window.location.href = '/product';
+        }
     }
 
     return (
         <>
-            <div className="card">
+        <body className="v_body">
+            <div className="v_card">
                 <div className="card-image"></div>
 
                 <form>
@@ -69,7 +81,7 @@ function SignUp(){
                         type="text" 
                         placeholder="Name" 
                         style={{borderColor:userColor}} 
-                        value={username} 
+                        value={username}
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     <p className="error">{errorUserName}</p>
@@ -81,7 +93,7 @@ function SignUp(){
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)}
                     />
-                    <p className="error">{errorEmail}</p>
+                    <p className="v_error">{errorEmail}</p>
 
                     <input 
                         type="password" 
@@ -104,6 +116,7 @@ function SignUp(){
                     <button className="submitButton" onClick={SignUp}>Submit</button>
                 </form>
             </div>
+        </body>
         </>
     );
 }

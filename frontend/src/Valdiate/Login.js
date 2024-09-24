@@ -20,6 +20,7 @@ function Login(){
 
     function Login(e){
         e.preventDefault()
+        window.location.href = '/product';
 
         // if (username.length > 5){
         //     setErrorUserName("")
@@ -43,6 +44,7 @@ function Login(){
 
     return (
         <>
+        <body className="v_body">
             <div className="card">
                 <div className="card-image"></div>
 
@@ -70,6 +72,7 @@ function Login(){
                     <button className="loginButton" onClick={Login}>Login</button>
                 </form>
             </div>
+        </body>
         </>
     );
 }
