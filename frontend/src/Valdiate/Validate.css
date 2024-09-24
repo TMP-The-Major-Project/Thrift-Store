@@ -49,3 +49,15 @@ input{
     color: #fff;
     font-weight: bold;
 }
+
+.loginButton{
+    width: 80%;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: transparent;
+    background: rgb(255, 90, 123);
+    cursor: pointer;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+}
