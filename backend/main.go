@@ -2,32 +2,25 @@ package main
 
 import (
 	"log"
-	"os"
 
 	"github.com/TMP-The-Major-Project/Thrift-Store/backend/controllers"
 	"github.com/TMP-The-Major-Project/Thrift-Store/backend/database"
-	"github.com/TMP-The-Major-Project/Thrift-Store/backend/middleware"
-	"github.com/TMP-The-Major-Project/Thrift-Store/backend/routes"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8000"
-	}
+	// Connect to the database
+	database.DBSet()
 
-	app := controllers.NewApplication(database.ProductData(database.Client, "Products"), database.UserData(database.Client, "Users"))
+	// Initialize the Fiber app
+	app := fiber.New()
 
-	router := gin.New()
-	router.Use(gin.Logger())
+	// Define routes
+	app.Post("/register", controllers.Register)
+	app.Post("/login", controllers.Login)
+	app.Get("/user", controllers.User)
+	app.Post("/logout", controllers.Logout)
 
-	routes.UserRoutes(router)
-	router.Use(middleware.Authentication())
-
-	router.GET("/addtocart", app.AddToCart())
-	router.GET("/removeitem", app.RemoveItem())
-	router.GET("/buy", app.Buy())
-
-	log.Fatal(router.Run(":" + port))
+	// Start the app
+	log.Fatal(app.Listen(":3000"))
 }

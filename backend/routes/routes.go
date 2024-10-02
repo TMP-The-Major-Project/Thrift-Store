@@ -2,12 +2,12 @@ package routes
 
 import (
 	"github.com/TMP-The-Major-Project/Thrift-Store/backend/controllers"
-	"github.com/gin-gonic/gin"
+	"github.com/gofiber/fiber/v2"
 )
 
-func UserRoutes(incomingRoutes *gin.Engine) {
-	incomingRoutes.POST("/user/signup", controllers.SignUP())
-	incomingRoutes.POST("/user/login", controllers.Login())
-	incomingRoutes.POST("/admin/addproduct", controllers.ProductViewerAdmin())
-	incomingRoutes.GET("/user/viewproduct", controllers.ProductViewer())
+func Setup(app *fiber.App) {
+	app.Post("/api/register", controllers.Register)
+	app.Post("/api/login", controllers.Login)
+	app.Get("/api/user", controllers.User)
+	app.Post("/api/logout", controllers.Logout)
 }
