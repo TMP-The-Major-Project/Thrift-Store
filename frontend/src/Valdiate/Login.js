@@ -1,45 +1,46 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Validate.css";
 
 function Login(){
 
-    const [username, setUsername] = useState("")
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [confirmPassword, setConfirmPassword] = useState("")
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-    const [errorUserName, setErrorUserName] = useState("")
-    const [errorEmail, setErrorEmail] = useState("")
-    const [errorPassword, setErrorPassword] = useState("")
-    const [errorConfirmPassword, setErrorConfirmPassword] = useState("")
+    const [errorUserName, setErrorUserName] = useState("");
+    const [errorPassword, setErrorPassword] = useState("");
 
-    const [userColor, setUserColor] = useState("")
-    const [emailColor, setEmailColor] = useState("")
-    const [passwordColor, setPasswordColor] = useState("")
-    const [confirmPasswordColor, setConfirmPasswordColor] = useState("")
+    const [userColor, setUserColor] = useState("");
+    const [passwordColor, setPasswordColor] = useState("");
 
-    function Login(e){
-        e.preventDefault()
-        window.location.href = '/product';
+    const navigate = useNavigate();  // To redirect after successful login
 
-        // if (username.length > 5){
-        //     setErrorUserName("")
-        //     setUserColor("green")
-        // } else{
-        //     setErrorUserName("Username must be 5 letters long")
-        //     setUserColor("red")
-        // }
+    async function handleLogin(e){
+        e.preventDefault();
 
+        // Perform backend validation
+        const response = await fetch('http://localhost:8080/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include',
+            body: JSON.stringify({
+                email: username,  // Using username as email in this example
+                password
+            })
+        });
 
-        // if(password!=="" && password===confirmPassword){
-        //     setErrorConfirmPassword("")
-        //     setConfirmPasswordColor("green")
-        // } else{
-        //     setErrorConfirmPassword("Password does not match")
-        //     setConfirmPasswordColor("red")
-        // }
+        const content = await response.json();
 
-
+        if (response.ok) {
+            // Assuming the backend returns a success message and user data
+            // Redirect to another page on success
+            navigate('/product');
+        } else {
+            // Handle error response from backend
+            setErrorUserName(content.message || "Invalid username or password");
+            setUserColor("red");
+            setPasswordColor("red");
+        }
     }
 
     return (
@@ -48,16 +49,15 @@ function Login(){
             <div className="card">
                 <div className="card-image"></div>
 
-                <form>
+                <form onSubmit={handleLogin}>
                     <input 
                         type="text" 
-                        placeholder="Username" 
+                        placeholder="Username or Email" 
                         style={{borderColor:userColor}} 
                         value={username} 
                         onChange={(e) => setUsername(e.target.value)}
                     />
                     <p className="error">{errorUserName}</p>
-
 
                     <input 
                         type="password" 
@@ -68,8 +68,7 @@ function Login(){
                     />
                     <p className="error">{errorPassword}</p>
 
-
-                    <button className="loginButton" onClick={Login}>Login</button>
+                    <button className="loginButton" type="submit">Login</button>
                 </form>
             </div>
         </body>
@@ -78,3 +77,4 @@ function Login(){
 }
 
 export default Login;
+
