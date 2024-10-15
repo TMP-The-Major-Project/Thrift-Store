@@ -2,9 +2,12 @@ package controllers
 
 import (
 	"log"
+	"strconv"
+	"time"
 
 	"github.com/TMP-The-Major-Project/Thrift-Store/backend/database"
 	"github.com/TMP-The-Major-Project/Thrift-Store/backend/models"
+	"github.com/dgrijalva/jwt-go/v4"
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -58,10 +61,36 @@ func Login(c *fiber.Ctx) error {
 		})
 	}
 
-	// pass, err := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	if err := bcrypt.CompareHashAndPassword(user.Password, []byte(data["password"])); err != nil {
+		c.Status(fiber.StatusBadGateway)
+		return c.JSON(fiber.Map{
+			"message": "Invalid Email or Password",
+		})
+	}
 
-	return c.JSON("Nothing here for now!")
+	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
+		// ExpiresAt: time.Now().Add(time.Hour*24).Unix(),
+		Issuer: strconv.Itoa(int(user.Id)),
+	})
+
+	tokken, err := claims.SignedString([]byte(database.SecretKey))
+	if err != nil {
+		c.Status(fiber.StatusInternalServerError)
+		return c.JSON(fiber.Map{
+			"message": "Could Not Login!!",
+		})
+	}
+
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    tokken,
+		Expires:  time.Now().Add(time.Hour * 24),
+		HTTPOnly: true,
+	}
+
+	c.Cookie(&cookie)
+
+	return c.JSON(fiber.Map{
+		"message": "success",
+	})
 }
