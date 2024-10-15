@@ -14,9 +14,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-#     - name: Set up Docker
-#       run: |
-#         sudo apt-get update
+    - name: Set up Docker
+      run: |
+        sudo apt-get update
+        sudo apt-get install docker-compose
 #         sudo apt-get install ca-certificates curl
 #         sudo install -m 0755 -d /etc/apt/keyrings
 #         sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
