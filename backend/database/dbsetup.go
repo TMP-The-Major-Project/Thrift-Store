@@ -1,68 +1,29 @@
 package database
 
 import (
-	"context"
-	"fmt"
 	"log"
-	"time"
+	"os"
 
-	"go.mongodb.org/mongo-driver/mongo"
-	"go.mongodb.org/mongo-driver/mongo/options"
+	"github.com/TMP-The-Major-Project/Thrift-Store/backend/models"
+	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
-var Client *mongo.Client
-
-// DBSet initializes the MongoDB client and connects to the database
-func DBSet() *mongo.Client {
-	// Adjust your MongoDB URI accordingly
-	uri := "mongodb://development:testpassword@localhost:27017"
-	clientOptions := options.Client().ApplyURI(uri)
-
-	// Create a new client and connect to MongoDB
-	client, err := mongo.NewClient(clientOptions)
+func check(eText string, err error) {
 	if err != nil {
-		log.Fatalf("Error creating MongoDB client: %v", err)
+		log.Fatalf("%v %v", eText, err)
 	}
-
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
-	err = client.Connect(ctx)
-	if err != nil {
-		log.Fatalf("Error connecting to MongoDB: %v", err)
-	}
-
-	// Ping the database to verify the connection
-	err = client.Ping(ctx, nil)
-	if err != nil {
-		log.Fatalf("Failed to ping MongoDB: %v", err)
-	}
-
-	fmt.Println("Successfully connected to MongoDB!")
-	return client
 }
 
-// Initialize the MongoDB client
-func init() {
-	Client = DBSet()
+func Connect() *gorm.DB {
+	err := godotenv.Load(".env")
+	check("Could not load the .env file", err)
+
+	db, err2 := gorm.Open(postgres.Open(os.Getenv("POSTGRES_URL")), &gorm.Config{})
+	check("Could not connect to database!!", err2)
+
+	db.AutoMigrate(&models.User{})
+
+	return db
 }
-
-// UserData returns a reference to the specified collection for user data
-func UserData(collectionName string) *mongo.Collection {
-	if Client == nil {
-		log.Fatal("MongoDB client is not initialized")
-	}
-	collection := Client.Database("users").Collection(collectionName)
-	return collection
-}
-
-// // ProductData returns a reference to the specified collection for product data
-// func ProductData(collectionName string) *mongo.Collection {
-// 	if Client == nil {
-// 		log.Fatal("MongoDB client is not initialized")
-// 	}
-// 	collection := Client.Database("Ecommerce").Collection(collectionName)
-// 	return collection
-// }
-//
-
