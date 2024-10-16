@@ -9,4 +9,6 @@ func Routes(app *fiber.App) {
 	app.Get("/", controllers.HelloSender)
 	app.Post("/login", controllers.Login)
 	app.Post("/register", controllers.Register)
+	app.Get("/user", controllers.User)
+	app.Post("/logout", controllers.Logout)
 }

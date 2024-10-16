@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
-import SignUp from "./Valdiate/SignUp"
-import Login from "./Valdiate/Login"
-import Navigation from "./Navigation/Nav";
+import SignUp from "./Valdiate/SignUp.tsx"
+import Login from "./Valdiate/Login.tsx"
+import Navigation from "./Navigation/Nav.tsx";
 import Products from "./Products/Products";
 import products from "./db/data";
 import Recommended from "./Recommended/Recommended";
@@ -72,16 +72,37 @@ function App() {
 
   const result = filteredData(products, selectedCategory, query);
 
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    (
+      async () => {
+        const resp = await fetch('http://localhost:3001/user', {
+          headers: {'Content-Type': 'application/json'},
+          credentials: 'include',
+        });
+
+        const content = await resp.json()
+        if(content.message==="Unauthenticated"){
+          setUsername("");
+        } else {
+          setUsername(content.username)
+        }
+      }
+    )();
+  });
+
+
 return (
     <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/sign-up" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route
           path="/product"
           element={
             <>
               <Sidebar handleChange={handleChange} />
-              <Navigation query={query} handleInputChange={handleInputChange} />
+              <Navigation query={query} handleInputChange={handleInputChange} username = {username} setUsername={setUsername} />
               <Recommended handleClick={handleClick} />
               <Products result={result} />
             </>

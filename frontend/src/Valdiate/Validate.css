@@ -1,63 +1,95 @@
-.v_body{
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.v_card{
-    background: #f3fffe;
-    display: flex;
-    /* grid-template-columns: 1fr 1fr; */
-    justify-content: center;
-    align-items: center;
-    width: 50rem;
-    height: 30rem;
-    box-shadow: 0.5px 0.5px 1px 1px rgb(255, 255, 223);
+.error_p{
+  color: red;
 }
 
-form{
-    display: flex;
-    flex-direction:column;
-    justify-content: center;
-    align-items: center;
+.v_body {
+  height: 100vh;
+  background: linear-gradient(to right, #1c1f3b 0%, #6d8299 50%, #8a0303 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-input{
-    padding: 10px;
-    margin: 10px;
-    width: 20rem;
-    background: transparent;
-    border: none;
-    border-bottom: 1px solid #ccc;
-    outline: none;
+.v_card {
+  background: #f3fffe;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 50rem;
+  height: 30rem;
+  box-shadow: 0.5px 0.5px 1px 1px rgb(255, 255, 223);
+  border-radius: 10px; /* Added border radius to match the button */
 }
 
-.v_error{
-    font-family: sans-serif;
-    color: red;
+.v_card-image {
+  background-image: url("https://i.ibb.co/VjspQVp/japan-background-digital-art.jpg");
+  background-position: left;
+  background-size: cover;
+  width: 100%; /* Make the image occupy full width of the card */
+  height: 30rem; /* Maintain aspect ratio by letting height adjust automatically */
+  border-radius: 10px; /* Added border radius to match the button */
 }
 
-.submitButton{
-    width: 80%;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: transparent;
-    background: rgb(255, 90, 123);
-    cursor: pointer;
-    border: none;
-    color: #fff;
-    font-weight: bold;
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Added padding to form for better spacing */
+  border-radius: 10px; /* Added border radius to match the button and card */
+  background: rgba(255, 255, 255, 0.8); /* Added subtle background to form for better contrast */
 }
 
-.loginButton{
-    width: 80%;
-    margin-top: 20px;
-    padding: 10px 20px;
-    background: transparent;
-    background: rgb(255, 90, 123);
-    cursor: pointer;
-    border: none;
-    color: #fff;
-    font-weight: bold;
+.input_f {
+  padding: 10px 10px;
+  margin: 5px;
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+  border-radius: 5px; /* Added border radius to input fields for a smoother look */
+}
+
+.error {
+  font-family: sans-serif;
+  color: red;
+}
+
+.submit-btn {
+  width: 80%;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #1c1f3b, #6d8299, #8a0303); /* Gradient from dark blue to bloody red */
+  cursor: pointer;
+  border: none;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px; 
+  transition: background 3s cubic-bezier(0.4, 0, 0.2, 1); /* Slowed down gradient transition */
+}
+
+.submit-btn:hover {
+  background: linear-gradient(to right, #8a0303, #6d8299, #1c1f3b); /* Reversed gradient on hover */
+}
+
+.prompt_m {
+    margin-top: 20px; /* Space above the prompt */
+    color: #6d8299; /* Text color to match the button */
+    font-size: 1rem; /* Adjust font size as needed */
+    text-align: center; /* Center the text */
+    font-weight: bold; /* Make the text stand out */
+}
+
+.login-link {
+    color: #1c1f3b; /* Color for the link */
+    transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.login-link:hover {
+    color: #8a0303; /* Change color on hover for better interactivity */
 }

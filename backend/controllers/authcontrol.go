@@ -29,7 +29,7 @@ func Register(c *fiber.Ctx) error {
 	}
 
 	user := models.User{
-		Name:     data["name"],
+		Username: data["username"],
 		Email:    data["email"],
 		Password: pass,
 	}
@@ -52,7 +52,7 @@ func Login(c *fiber.Ctx) error {
 
 	db := database.Connect()
 
-	db.Where("email = ?", data["email"]).First(&user)
+	db.Where("username = ?", data["username"]).First(&user)
 
 	if user.Id == 0 {
 		c.Status(fiber.StatusNotFound)
@@ -64,7 +64,7 @@ func Login(c *fiber.Ctx) error {
 	if err := bcrypt.CompareHashAndPassword(user.Password, []byte(data["password"])); err != nil {
 		c.Status(fiber.StatusBadGateway)
 		return c.JSON(fiber.Map{
-			"message": "Invalid Email or Password",
+			"message": "Invalid Username or Password",
 		})
 	}
 
@@ -85,6 +85,45 @@ func Login(c *fiber.Ctx) error {
 		Name:     "jwt",
 		Value:    tokken,
 		Expires:  time.Now().Add(time.Hour * 24),
+		HTTPOnly: true,
+	}
+
+	c.Cookie(&cookie)
+
+	return c.JSON(fiber.Map{
+		"message": "success",
+	})
+}
+
+func User(c *fiber.Ctx) error {
+	cookie := c.Cookies("jwt")
+
+	token, err := jwt.ParseWithClaims(cookie, &jwt.StandardClaims{}, func(token *jwt.Token) (interface{}, error) {
+		return []byte(database.SecretKey), nil
+	})
+	if err != nil {
+		c.Status(fiber.StatusUnauthorized)
+		return c.JSON(fiber.Map{
+			"message": "Unauthenticated",
+		})
+	}
+
+	claims := token.Claims.(*jwt.StandardClaims)
+
+	var user models.User
+
+	db := database.Connect()
+
+	db.Where("id = ?", claims.Issuer).First(&user)
+
+	return c.JSON(user)
+}
+
+func Logout(c *fiber.Ctx) error {
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    "",
+		Expires:  time.Now().Add(-time.Hour),
 		HTTPOnly: true,
 	}
 
