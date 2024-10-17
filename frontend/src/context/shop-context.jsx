@@ -27,45 +27,45 @@ export const ShopContextProvider = (props) => {
     loadProducts();
   }, []); // Empty dependency array ensures this runs once on mount
 
-  const getTotalCartAmount = () => {
-    let totalAmount = 0;
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        let itemInfo = products.find((product) => product.id === Number(item));
-        totalAmount += cartItems[item] * itemInfo.price;
-      }
-    }
-    return totalAmount;
-  };
+  // const getTotalCartAmount = () => {
+  //   let totalAmount = 0;
+  //   for (const item in cartItems) {
+  //     if (cartItems[item] > 0) {
+  //       let itemInfo = products.find((product) => product.id === Number(item));
+  //       totalAmount += cartItems[item] * itemInfo.newPrice;
+  //     }
+  //   }
+  //   return totalAmount;
+  // };
 
-  const addToCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-  };
+  // const addToCart = (itemId) => {
+  //   setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+  // };
+  //
+  // const removeFromCart = (itemId) => {
+  //   setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
+  // };
+  //
+  // const updateCartItemCount = (newAmount, itemId) => {
+  //   setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
+  // };
+  //
+  // const checkout = () => {
+  //   setCartItems(getDefaultCart(products));
+  // };
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }));
-  };
+  // const contextValue = {
+    // cartItems,
+    // addToCart,
+    // updateCartItemCount,
+    // removeFromCart,
+    // getTotalCartAmount,
+    // checkout,
+  // };
 
-  const updateCartItemCount = (newAmount, itemId) => {
-    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
-  };
-
-  const checkout = () => {
-    setCartItems(getDefaultCart(products));
-  };
-
-  const contextValue = {
-    cartItems,
-    addToCart,
-    updateCartItemCount,
-    removeFromCart,
-    getTotalCartAmount,
-    checkout,
-  };
-
-  return (
-    <ShopContext.Provider value={contextValue}>
-      {props.children}
-    </ShopContext.Provider>
-  );
+  // return (
+  //   <ShopContext.Provider>
+  //     // {props.children}
+  //   </ShopContext.Provider>
+  // );
 };

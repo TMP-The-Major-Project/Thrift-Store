@@ -1,16 +1,14 @@
-import React, { useContext,useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { ShopContext } from "../context/shop-context";
 import { fetchData } from "../db/data"; // Import fetch function
-// import { PRODUCTS } from "../../products";
 import { CartItem } from "./cart-item";
 import { useNavigate } from "react-router-dom";
-
 import "./cart.css";
+
 const Cart = () => {
   const { cartItems, getTotalCartAmount, checkout } = useContext(ShopContext);
   const totalAmount = getTotalCartAmount();
 
-  // State to hold the fetched products
   const [products, setProducts] = useState([]);
 
   // Fetch products from the API
@@ -21,7 +19,7 @@ const Cart = () => {
     };
 
     loadProducts();
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
   const navigate = useNavigate();
 
@@ -30,10 +28,10 @@ const Cart = () => {
       <div>
         <h1>Your Cart Items</h1>
       </div>
-      <div className="cart">
+      <div className="cartItems">
         {products.map((product) => {
           if (cartItems[product.id] !== 0) {
-            return <CartItem data={product} />;
+            return <CartItem key={product.id} data={product} />;
           }
         })}
       </div>
@@ -41,19 +39,18 @@ const Cart = () => {
       {totalAmount > 0 ? (
         <div className="checkout">
           <p> Subtotal: ${totalAmount} </p>
-          <button onClick={() => navigate("/")}> Continue Shopping </button>
+          <button onClick={() => navigate("/product")}> Continue Shopping </button>
           <button
             onClick={() => {
               checkout();
               navigate("/checkout");
             }}
           >
-            {" "}
-            Checkout{" "}
+            Checkout
           </button>
         </div>
       ) : (
-        <h1> Your Shopping Cart is Empty</h1>
+        <h1>Your Shopping Cart is Empty</h1>
       )}
     </div>
   );
