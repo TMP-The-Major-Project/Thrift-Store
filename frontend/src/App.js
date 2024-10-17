@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 
-import SignUp from "./Valdiate/SignUp.tsx"
-import Login from "./Valdiate/Login.tsx"
+import SignUp from "./Valdiate/SignUp.tsx";
+import Login from "./Valdiate/Login.tsx";
+import AdminLogin from "./Valdiate/AdminLogin.tsx";
 import Navigation from "./Navigation/Nav.tsx";
 import Products from "./Products/Products";
-import products from "./db/data";
+import { fetchData } from "./db/data"; // Import fetch function
 import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
 import Card from "./components/Card";
@@ -13,6 +14,19 @@ import "./index.css";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
+
+  // State to hold the fetched products
+  const [products, setProducts] = useState([]);
+
+  // Fetch products from the API
+  useEffect(() => {
+    const loadProducts = async () => {
+      const fetchedProducts = await fetchData(); // Fetching data from the external source
+      setProducts(fetchedProducts); // Set the fetched data into state
+    };
+
+    loadProducts();
+  }, []); // Empty dependency array ensures this runs once on mount
 
   // ----------- Input Filter -----------
   const [query, setQuery] = useState("");
@@ -82,18 +96,17 @@ function App() {
           credentials: 'include',
         });
 
-        const content = await resp.json()
-        if(content.message==="Unauthenticated"){
+        const content = await resp.json();
+        if(content.message === "Unauthenticated"){
           setUsername("");
         } else {
-          setUsername(content.username)
+          setUsername(content.username);
         }
       }
     )();
-  });
+  }, []); // Adding an empty dependency array to prevent endless re-renders
 
-
-return (
+  return (
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
@@ -102,7 +115,7 @@ return (
           element={
             <>
               <Sidebar handleChange={handleChange} />
-              <Navigation query={query} handleInputChange={handleInputChange} username = {username} setUsername={setUsername} />
+              <Navigation query={query} handleInputChange={handleInputChange} username={username} setUsername={setUsername} />
               <Recommended handleClick={handleClick} />
               <Products result={result} />
             </>
@@ -110,25 +123,20 @@ return (
         />
         <Route
           path="/sign-up" 
-          element={
-            <>
-              <SignUp/>
-            </>
-          }
+          element={<SignUp />}
         />
-
         <Route
           path="/login" 
-          element={
-            <>
-              <Login/>
-            </>
-          }
+          element={<Login />}
         />
-
+        <Route
+          path="/admin"
+          element={<AdminLogin />}
+        />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+

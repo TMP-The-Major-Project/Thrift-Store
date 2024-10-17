@@ -133,3 +133,81 @@ func Logout(c *fiber.Ctx) error {
 		"message": "success",
 	})
 }
+
+func AdminRegister(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	pass, err := bcrypt.GenerateFromPassword([]byte(data["password"]), 14)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	admin := models.Admin{
+		Username: data["username"],
+		Password: pass,
+	}
+
+	db := database.Connect()
+
+	db.Create(&admin)
+
+	return c.JSON(admin)
+}
+
+func AdminLogin(c *fiber.Ctx) error {
+	var data map[string]string
+
+	if err := c.BodyParser(&data); err != nil {
+		return err
+	}
+
+	var admin models.Admin
+
+	db := database.Connect()
+
+	db.Where("username = ?", data["username"]).First(&admin)
+
+	if admin.Id == 0 {
+		c.Status(fiber.StatusNotFound)
+		return c.JSON(fiber.Map{
+			"message": "User not found",
+		})
+	}
+
+	if err := bcrypt.CompareHashAndPassword(admin.Password, []byte(data["password"])); err != nil {
+		c.Status(fiber.StatusBadGateway)
+		return c.JSON(fiber.Map{
+			"message": "Invalid Username or Password",
+		})
+	}
+
+	claims := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.StandardClaims{
+		// ExpiresAt: time.Now().Add(time.Hour*24).Unix(),
+		Issuer: strconv.Itoa(int(admin.Id)),
+	})
+
+	tokken, err := claims.SignedString([]byte(database.SecretKey))
+	if err != nil {
+		c.Status(fiber.StatusInternalServerError)
+		return c.JSON(fiber.Map{
+			"message": "Could Not Login!!",
+		})
+	}
+
+	cookie := fiber.Cookie{
+		Name:     "jwt",
+		Value:    tokken,
+		Expires:  time.Now().Add(time.Hour * 24),
+		HTTPOnly: true,
+	}
+
+	c.Cookie(&cookie)
+
+	return c.JSON(fiber.Map{
+		"message": "success",
+	})
+}

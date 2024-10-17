@@ -27,6 +27,8 @@ func Connect() *gorm.DB {
 	check("Could not connect to database!!", err2)
 
 	db.AutoMigrate(&models.User{})
+	db.AutoMigrate(&models.Admin{})
+	db.AutoMigrate(&models.Product{})
 
 	return db
 }
