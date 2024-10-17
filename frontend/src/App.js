@@ -10,7 +10,6 @@ import { fetchData } from "./db/data"; // Import fetch function
 import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
 import Card from "./components/Card";
-import Cart from "./cart/cart";
 import "./index.css";
 
 function App() {
@@ -134,10 +133,6 @@ function App() {
         <Route
           path="/admin"
           element={<AdminLogin />}
-        />
-        <Route
-          path="/cart" 
-          element={<Cart/>}
         />
       </Routes>
     </Router>

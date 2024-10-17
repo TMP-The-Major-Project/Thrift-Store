@@ -1,10 +1,5 @@
-import React, { useContext } from "react";
-import { ShopContext } from "../context/shop-context";
-const Card = ({ id, img, title, star, reviews, prevPrice, newPrice }) => {
-  const { addToCart, cartItems } = useContext(ShopContext);
-
-  const cartItemCount = cartItems[id];
-
+import { BsFillBagFill } from "react-icons/bs";
+const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
   return (
     <>
       <section className="card">
@@ -19,9 +14,9 @@ const Card = ({ id, img, title, star, reviews, prevPrice, newPrice }) => {
             <div className="price">
               <del>{prevPrice}</del> {newPrice}
             </div>
-    <button className="addToCartBttn" onClick={() => addToCart(id)}>
-        Add To Cart {cartItemCount > 0 && <> ({cartItemCount})</>}
-      </button>
+    <div className="bag">
+              <BsFillBagFill className="bag-icon" />
+            </div>
           </section>
         </div>
       </section>
