@@ -14,7 +14,7 @@ type Admin struct {
 }
 
 type Product struct {
-	ID        uint   `gorm:"primaryKey"`
+	ID        uint   `gorm:"primaryKey" json:"id"`
 	Img       string `json:"img"`
 	Title     string `json:"title"`
 	Reviews   string `json:"reviews"`   // Number of reviews as a string (e.g., "(3 reviews)")
