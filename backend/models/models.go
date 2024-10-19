@@ -19,7 +19,7 @@ type Product struct {
 	Title     string `json:"title"`
 	Reviews   string `json:"reviews"`   // Number of reviews as a string (e.g., "(3 reviews)")
 	PrevPrice string `json:"prevPrice"` // Previous price as a string
-	NewPrice  string `json:"newPrice"`  // New price as a string
+	NewPrice  int    `json:"newPrice"`  // New price as a string
 	Company   string `json:"company"`
 	Color     string `json:"color"`
 	Category  string `json:"category"`

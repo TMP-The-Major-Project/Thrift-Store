@@ -1,6 +1,11 @@
+import { useContext } from "react";
+import { ProdContext } from "../context/product-context";
 import { BsFillBagFill } from "react-icons/bs";
+import "./Card.css";
 
-const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
+
+const Card = ({ id, img, title, star, reviews, prevPrice, newPrice }) => {
+  const {addToCart} = useContext(ProdContext)
   return (
     <>
       <section className="card">
@@ -15,9 +20,9 @@ const Card = ({ img, title, star, reviews, prevPrice, newPrice }) => {
             <div className="price">
               <del>{prevPrice}</del> {newPrice}
             </div>
-            <div className="bag">
+            <button className="c_bag" onClick={() => addToCart(id)}>
               <BsFillBagFill className="bag-icon" />
-            </div>
+            </button>
           </section>
         </div>
       </section>

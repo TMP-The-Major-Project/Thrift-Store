@@ -10,8 +10,9 @@ import { fetchData } from "./db/data"; // Import fetch function
 import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
 import Card from "./components/Card";
-import Cart from "./cart/cart";
+import Cart  from "./cart/cart.jsx";
 import "./index.css";
+import { ProdContextProvider } from "./context/product-context";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -71,8 +72,9 @@ function App() {
     }
 
     return filteredProducts.map(
-      ({ img, title, star, reviews, prevPrice, newPrice }) => (
+      ({ id, img, title, star, reviews, prevPrice, newPrice }) => (
         <Card
+          id={id}
           key={Math.random()}
           img={img}
           title={title}
@@ -88,6 +90,7 @@ function App() {
   const result = filteredData(products, selectedCategory, query);
 
   const [username, setUsername] = useState('');
+
 
   useEffect(() => {
     (
@@ -108,20 +111,10 @@ function App() {
   }, []); // Adding an empty dependency array to prevent endless re-renders
 
   return (
+    
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
-        <Route
-          path="/product"
-          element={
-            <>
-              <Sidebar handleChange={handleChange} />
-              <Navigation query={query} handleInputChange={handleInputChange} username={username} setUsername={setUsername} />
-              <Recommended handleClick={handleClick} />
-              <Products result={result} />
-            </>
-          }
-        />
         <Route
           path="/sign-up" 
           element={<SignUp />}
@@ -134,11 +127,34 @@ function App() {
           path="/admin"
           element={<AdminLogin />}
         />
+      </Routes>
+    <div>
+
+        <ProdContextProvider>
+    <Routes>
+        <Route
+          path="/product"
+          element={
+            <>
+              <Sidebar handleChange={handleChange} />
+              <Navigation query={query} handleInputChange={handleInputChange} username={username} setUsername={setUsername} />
+              <Recommended handleClick={handleClick} />
+              <Products result={result} />
+            </>
+          }
+        />
         <Route
           path="/cart" 
-          element={<Cart/>}
+          element={
+            <>
+              <Navigation query={query} handleInputChange={handleInputChange} username={username} setUsername={setUsername} />
+              <Cart result={products} />
+            </>
+          }
         />
-      </Routes>
+    </Routes>
+    </ProdContextProvider>
+    </div>
     </Router>
   );
 }

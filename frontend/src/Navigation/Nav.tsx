@@ -31,7 +31,7 @@ const Nav = ({ handleInputChange, query, username, setUsername }) => {
          <a href="#">
            <FiHeart className="nav-icons" />
          </a>
-         <a href="">
+         <a href="/cart">
            <AiOutlineShoppingCart className="nav-icons" />
          </a>
          <a>
@@ -58,7 +58,7 @@ const Nav = ({ handleInputChange, query, username, setUsername }) => {
          <a href="#">
            <FiHeart className="nav-icons" />
          </a>
-         <a href="">
+         <a href="cart">
            <AiOutlineShoppingCart className="nav-icons" />
          </a>
          <a href="/sign-up">
