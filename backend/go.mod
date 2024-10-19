@@ -3,6 +3,7 @@ module github.com/TMP-The-Major-Project/Thrift-Store/backend
 go 1.22.5
 
 require (
+	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1
 	github.com/gofiber/fiber/v2 v2.52.5
 	github.com/joho/godotenv v1.5.1
 	golang.org/x/crypto v0.28.0
@@ -12,7 +13,6 @@ require (
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
-	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1 // indirect
 	github.com/google/uuid v1.5.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect
