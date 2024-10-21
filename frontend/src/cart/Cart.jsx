@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import { ProdContext } from "../context/product-context"; // Import your context
-import "./cart.css";
+import { ProdContext } from "../context/ProdContext"; // Import your context
+import "./Cart.css";
 
 const Cart = () => {
   const { cart, removeFromCart, updateQuantity, fetchCart, fetchCartTotal } = useContext(ProdContext);

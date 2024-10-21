@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ProdContext } from "../context/product-context"; // Import your context
+import { ProdContext } from "../context/ProdContext"; // Import your context
 import { BsFillBagFill } from "react-icons/bs";
 import "./Card.css";
 

@@ -67,6 +67,7 @@ export const ProdProvider = ({ children }) => {
     try {
       const response = await axios.delete("http://localhost:3001/cart/clear");
       setCart([]); // Empty the cart
+      console.log(response)
     } catch (error) {
       console.error("Error clearing cart:", error);
     }
