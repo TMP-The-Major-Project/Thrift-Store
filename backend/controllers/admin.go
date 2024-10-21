@@ -25,12 +25,70 @@ func GetProducts(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(products)
 }
 
-func getProduct(c *fiber.Ctx) error {
-	id := c.Params("id")
-	var product models.Product
+func AddToCart(c *fiber.Ctx) error {
+	cartItem := new(models.CartItem)
+	if err := c.BodyParser(cartItem); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Failed to parse request body"})
+	}
+
 	db := database.Connect()
-	if err := db.First(&product, id).Error; err != nil {
+
+	// Check if the product exists
+	var product models.Product
+	if err := db.First(&product, cartItem.ProductID).Error; err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Product not found"})
 	}
-	return c.Status(fiber.StatusOK).JSON(product)
+
+	// Add to cart
+	cartItem.TotalPrice = product.NewPrice * float64(cartItem.Quantity)
+	db.Create(&cartItem)
+
+	return c.Status(fiber.StatusCreated).JSON(cartItem)
+}
+
+func RemoveFromCart(c *fiber.Ctx) error {
+	id := c.Params("id")
+	db := database.Connect()
+
+	// Find and delete the cart item
+	if err := db.Delete(&models.CartItem{}, id).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Item not found"})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"message": "Item removed from cart"})
+}
+
+func GetCartTotal(c *fiber.Ctx) error {
+	var cartItems []models.CartItem
+	db := database.Connect()
+
+	// Find all items in the cart
+	db.Find(&cartItems)
+
+	var total float64 = 0
+
+	// Sum the total prices of each item in the cart
+	for _, item := range cartItems {
+		total += item.TotalPrice
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"cart_total": total})
+}
+
+func GetCartItems(c *fiber.Ctx) error {
+	var cartItems []models.CartItem
+	db := database.Connect()
+
+	// Retrieve all items in the cart
+	if err := db.Find(&cartItems).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to retrieve cart items"})
+	}
+
+	// Create a response object
+	response := models.CartResponse{
+		Cart: cartItems,
+	}
+
+	// Return the response with a 200 status
+	return c.Status(fiber.StatusOK).JSON(response)
 }
