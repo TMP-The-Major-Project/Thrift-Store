@@ -1,23 +1,50 @@
-import React from "react";
-import CartItem from "./CartItem";
+import React, { useContext, useEffect } from "react";
+import { ProdContext } from "../context/product-context"; // Import your context
+import "./cart.css";
 
-const Cart = ({ result }) => {
+const Cart = () => {
+  const { cart, removeFromCart, updateQuantity, fetchCart, fetchCartTotal } = useContext(ProdContext);
+  const [total, setTotal] = React.useState(0);
+
+  useEffect(() => {
+    fetchCart(); // Fetch cart items on component mount
+    async function getTotal() {
+      const cartTotal = await fetchCartTotal(); // Fetch cart total
+      setTotal(cartTotal);
+    }
+    getTotal();
+  }, [fetchCart, fetchCartTotal]);
+
   return (
-    result.map(
-      ({ id, img, title, star, reviews, prevPrice, newPrice }) => (
-        <CartItem
-          id={id}
-          key={Math.random()}
-          img={img}
-          title={title}
-          star={star}
-          reviews={reviews}
-          prevPrice={prevPrice}
-          newPrice={newPrice}
-        />
-      )
-    )
+    <div className="cart">
+      <h2>Your Cart</h2>
+      {cart.length === 0 ? (
+        <p>Your cart is empty.</p>
+      ) : (
+        <>
+          {cart.map((item) => (
+            <div className="cartItem" key={item.id}>
+              <img src={item.image} alt={item.name} />
+              <div className="description">
+                <h3>{item.name}</h3>
+                <p>${item.price}</p>
+                <div className="countHandler">
+                  <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>-</button>
+                  <input type="text" value={item.quantity} readOnly />
+                  <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                </div>
+                <button onClick={() => removeFromCart(item.id)}>Remove</button>
+              </div>
+            </div>
+          ))}
+          <div className="checkout">
+            <h3>Total: ${total}</h3>
+            <button onClick={() => alert("Proceeding to checkout")}>Checkout</button>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 
-export default Cart
+export default Cart;

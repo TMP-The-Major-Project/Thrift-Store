@@ -10,56 +10,36 @@ import { fetchData } from "./db/data"; // Import fetch function
 import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
 import Card from "./components/Card";
-import Cart  from "./cart/cart.jsx";
+import Cart from "./cart/cart.jsx";
 import "./index.css";
-import { ProdContextProvider } from "./context/product-context";
+import { ProdProvider } from "./context/product-context";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  // State to hold the fetched products
   const [products, setProducts] = useState([]);
+  const [query, setQuery] = useState("");
+  const [username, setUsername] = useState('');
 
-  // Fetch products from the API
   useEffect(() => {
     const loadProducts = async () => {
-      const fetchedProducts = await fetchData(); // Fetching data from the external source
-      setProducts(fetchedProducts); // Set the fetched data into state
+      const fetchedProducts = await fetchData(); 
+      setProducts(fetchedProducts);
     };
 
     loadProducts();
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
-  // ----------- Input Filter -----------
-  const [query, setQuery] = useState("");
-
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
-  };
-
+  const handleInputChange = (event) => setQuery(event.target.value);
   const filteredItems = products.filter(
     (product) => product.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
   );
 
-  // ----------- Radio Filtering -----------
-  const handleChange = (event) => {
-    setSelectedCategory(event.target.value);
-  };
-
-  // ------------ Button Filtering -----------
-  const handleClick = (event) => {
-    setSelectedCategory(event.target.value);
-  };
+  const handleChange = (event) => setSelectedCategory(event.target.value);
+  const handleClick = (event) => setSelectedCategory(event.target.value);
 
   function filteredData(products, selected, query) {
     let filteredProducts = products;
-
-    // Filtering Input Items
-    if (query) {
-      filteredProducts = filteredItems;
-    }
-
-    // Applying selected filter
+    if (query) filteredProducts = filteredItems;
     if (selected) {
       filteredProducts = filteredProducts.filter(
         ({ category, color, company, newPrice, title }) =>
@@ -89,75 +69,58 @@ function App() {
 
   const result = filteredData(products, selectedCategory, query);
 
-  const [username, setUsername] = useState('');
-
-
   useEffect(() => {
-    (
-      async () => {
-        const resp = await fetch('http://localhost:3001/user', {
-          headers: {'Content-Type': 'application/json'},
-          credentials: 'include',
-        });
+    (async () => {
+      const resp = await fetch('http://localhost:3001/user', {
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+      });
 
-        const content = await resp.json();
-        if(content.message === "Unauthenticated"){
-          setUsername("");
-        } else {
-          setUsername(content.username);
-        }
+      const content = await resp.json();
+      if(content.message === "Unauthenticated"){
+        setUsername("");
+      } else {
+        setUsername(content.username);
       }
-    )();
-  }, []); // Adding an empty dependency array to prevent endless re-renders
+    })();
+  }, []);
 
   return (
-    
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
-        <Route
-          path="/sign-up" 
-          element={<SignUp />}
-        />
-        <Route
-          path="/login" 
-          element={<Login />}
-        />
-        <Route
-          path="/admin"
-          element={<AdminLogin />}
-        />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<AdminLogin />} />
       </Routes>
-    <div>
-
-        <ProdContextProvider>
-    <Routes>
-        <Route
-          path="/product"
-          element={
-            <>
-              <Sidebar handleChange={handleChange} />
-              <Navigation query={query} handleInputChange={handleInputChange} username={username} setUsername={setUsername} />
-              <Recommended handleClick={handleClick} />
-              <Products result={result} />
-            </>
-          }
-        />
-        <Route
-          path="/cart" 
-          element={
-            <>
-              <Navigation query={query} handleInputChange={handleInputChange} username={username} setUsername={setUsername} />
-              <Cart result={products} />
-            </>
-          }
-        />
-    </Routes>
-    </ProdContextProvider>
-    </div>
+      <div>
+        <ProdProvider>
+          <Routes>
+            <Route
+              path="/product"
+              element={
+                <>
+                  <Sidebar handleChange={handleChange} />
+                  <Navigation query={query} handleInputChange={handleInputChange} username={username} setUsername={setUsername} />
+                  <Recommended handleClick={handleClick} />
+                  <Products result={result} />
+                </>
+              }
+            />
+            <Route
+              path="/cart" 
+              element={
+                <>
+                  <Navigation /> {/* Simplified without search and username props */}
+                  <Cart result={products} /> {/* Display cart items */}
+                </>
+              }
+            />
+          </Routes>
+        </ProdProvider>
+      </div>
     </Router>
   );
 }
 
 export default App;
-
