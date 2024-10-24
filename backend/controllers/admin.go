@@ -35,9 +35,12 @@ func AddToCart(c *fiber.Ctx) error {
 
 	// Check if the product exists
 	var product models.Product
-	if err := db.First(&product, cartItem.ProductID).Error; err != nil {
+	if err := db.Select("Id, Img, Title, New_Price").First(&product, cartItem.ProductID).Error; err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Product not found"})
 	}
+	// Assign the retrieved fields to the corresponding cartItem fields
+	cartItem.Img = product.Img
+	cartItem.Title = product.Title
 
 	// Add to cart
 	cartItem.TotalPrice = product.NewPrice * float64(cartItem.Quantity)
@@ -91,4 +94,15 @@ func GetCartItems(c *fiber.Ctx) error {
 
 	// Return the response with a 200 status
 	return c.Status(fiber.StatusOK).JSON(response)
+}
+
+func ClearCartItems(c *fiber.Ctx) error {
+	db := database.Connect()
+
+	// Truncate the cart items table
+	if err := db.Exec("TRUNCATE TABLE cart_items RESTART IDENTITY").Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": "Failed to clear cart items"})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{"message": "Cart items cleared"})
 }

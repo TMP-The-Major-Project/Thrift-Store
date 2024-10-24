@@ -59,7 +59,6 @@ function App() {
       ({ id, img, title, star, reviews, prevPrice, newPrice }) => (
         <Card
           id={id}
-          key={id}
           img={img}
           title={title}
           star={star}
@@ -90,42 +89,45 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <ProdProvider>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<AdminLogin />} />
-          <Route
-            path="/product"
-            element={
-              <>
-                <Sidebar handleChange={handleChange} />
-                <Navigation
-                  query={query}
-                  handleInputChange={handleInputChange}
-                  username={username}
-                  setUsername={setUsername}
-                />
-                <Recommended handleClick={handleClick} />
-                <Products result={result} />
-              </>
-            }
-          />
-          <Route
-            path="/cart"
-            element={
+<Router>
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<AdminLogin />} />
+        <Route
+          path="/product"
+          element={
+            <ProdProvider>
+            <>
+              <Sidebar handleChange={handleChange} />
+              <Navigation
+                query={query}
+                handleInputChange={handleInputChange}
+                username={username}
+                setUsername={setUsername}
+              />
+              <Recommended handleClick={handleClick} />
+              <Products result={result} />
+            </>
+            </ProdProvider>
+          }
+        />
+        
+        {/* Wrap the Cart route with ProdProvider */}
+        <Route
+          path="/cart"
+          element={
+            <ProdProvider>
               <>
                 <Navigation username={username} />
                 <Cart result={products} />
               </>
-            }
-          />
-        </Routes>
-      </ProdProvider>
-    </Router>
-  );
+            </ProdProvider>
+          }
+        />
+      </Routes>
+    </Router>  );
 }
 
 export default App;

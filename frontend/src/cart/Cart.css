@@ -1,43 +1,113 @@
-.cart {
+.cart-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
-.cartItem {
+.cart-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.empty-cart-message {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.cart-item {
   width: 700px;
   height: 250px;
   display: flex;
-
   align-items: center;
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
   border-radius: 25px;
   margin: 30px;
 }
 
-.cartItem img {
+.cart-item-image {
   width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 25px 0 0 25px;
 }
 
-.cartItem .description {
+.cart-item-description {
   width: 100%;
   font-size: 30px;
+  padding: 20px;
 }
 
-.countHandler input {
+.cart-item-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.cart-item-price {
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.cart-item-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove-from-cart-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quantity-handler {
+  display: flex;
+  align-items: center;
+}
+
+.decrement-quantity-button, .increment-quantity-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quantity-input {
   width: 40px;
   text-align: center;
   font-weight: bolder;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
 }
 
-.checkout button {
-  width: 150px;
-  height: 50px;
-  background-color: rgb(19, 19, 19);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  margin: 10px;
-  cursor: pointer;
+.checkout-section {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 10px; /* Space between items */
+}
+
+.total-price {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.checkout-button {
+  padding: 10px 20px; /* Add some padding */
+  margin-right: 20px;;
+  background-color: #007bff; /* Example background color */
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.checkout-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
 }
