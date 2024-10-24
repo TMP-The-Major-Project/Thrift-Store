@@ -2,15 +2,35 @@
   background-color: transparent;
   border: 2px solid rgb(19, 19, 19);
   min-width: 100px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding: 5px 10px;
   border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .c_bag:hover {
   background-color: rgb(19, 19, 19);
   color: white;
   cursor: pointer;
+}
+.uniform-size {
+  width: 100%; /* Make the image take the full width of the card */
+  height: 200px; /* Set a fixed height for uniformity */
+  object-fit: cover; /* Ensure the image covers the area without distortion */
+  border-radius: 15px; /* Optional: Add rounded corners */
+}
+
+.card {
+  /* Other card styles */
+  width: 15em;
+  border: 1px solid #ccc; /* Example border */
+  border-radius: 15px; /* Rounded corners for the card */
+  overflow: hidden; /* Ensure child elements don't overflow */
+  transition: transform 0.2s; /* Optional: Add a hover effect */
+  mix-blend-mode: multiply;
+}
+
+.card:hover {
+  transform: scale(1.05); /* Optional: Slightly scale the card on hover */
 }

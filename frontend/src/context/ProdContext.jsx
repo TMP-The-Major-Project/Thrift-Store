@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 
 // Create the context
@@ -7,6 +7,20 @@ export const ProdContext = createContext();
 export const ProdProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
+  // Function to fetch the cart items when the provider mounts
+  const fetchCart = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/cart/items");
+      setCart(response.data.cart); // Make sure your API returns an object with cart
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCart(); // Fetch cart items on component mount
+  }, []);
+
   // Add item to cart
   const addToCart = async (productId) => {
     try {
@@ -14,7 +28,8 @@ export const ProdProvider = ({ children }) => {
         product_id: productId,
         quantity: 1, // Default quantity to 1
       });
-      setCart(response.data.cart);
+      // Assuming the server responds with the entire cart
+      setCart(response.data.cart); // Ensure your API returns the updated cart
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }
@@ -23,8 +38,11 @@ export const ProdProvider = ({ children }) => {
   // Remove item from cart
   const removeFromCart = async (productId) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/cart/remove/${productId}`);
-      setCart(response.data.cart); // Update cart after removal
+      console.log(`Attempting to remove product with ID: ${productId}`);
+      const response = await axios.delete(`http://localhost:3001/cart/delete/${productId}`);
+      console.log('Response from server:', response.data);
+      setCart(response.data.cart); // Ensure your API returns the updated cart
+      window.location.reload(); // Reload the page
     } catch (error) {
       console.error("Error removing product from cart:", error);
     }
@@ -36,19 +54,9 @@ export const ProdProvider = ({ children }) => {
       const response = await axios.put(`http://localhost:3001/cart/update/${productId}`, {
         quantity: newQuantity,
       });
-      setCart(response.data.cart); // Update cart with new quantity
+      setCart(response.data.cart); // Ensure your API returns the updated cart
     } catch (error) {
       console.error("Error updating product quantity:", error);
-    }
-  };
-
-  // Fetch all cart items
-  const fetchCart = async () => {
-    try {
-      const response = await axios.get("http://localhost:3001/cart/items");
-      setCart(response.data.cart);
-    } catch (error) {
-      console.error("Error fetching cart:", error);
     }
   };
 
@@ -56,7 +64,7 @@ export const ProdProvider = ({ children }) => {
   const fetchCartTotal = async () => {
     try {
       const response = await axios.get("http://localhost:3001/cart/total");
-      return response.data.cart_total;
+      return response.data.cart_total; // Ensure your API returns the cart_total correctly
     } catch (error) {
       console.error("Error fetching cart total:", error);
     }
@@ -67,14 +75,14 @@ export const ProdProvider = ({ children }) => {
     try {
       const response = await axios.delete("http://localhost:3001/cart/clear");
       setCart([]); // Empty the cart
-      console.log(response)
+      console.log('Cart cleared:', response.data);
     } catch (error) {
       console.error("Error clearing cart:", error);
     }
   };
 
   return (
-    <ProdContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, fetchCart, fetchCartTotal, clearCart }}>
+    <ProdContext.Provider value={{ cart, fetchCart, addToCart, removeFromCart, updateQuantity, fetchCartTotal, clearCart }}>
       {children}
     </ProdContext.Provider>
   );

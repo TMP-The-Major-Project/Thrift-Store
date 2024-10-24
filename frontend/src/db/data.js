@@ -7,6 +7,7 @@ export const fetchData = async () => {
 
     // Map the result to match your desired structure
     const data = result.map(product => ({
+      id: product.id,
       img: product.img,
       title: product.title,
       star: <AiFillStar className="rating-star" />,
