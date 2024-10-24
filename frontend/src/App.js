@@ -15,6 +15,7 @@ import Recommended from "./Recommended/Recommended";
 import Sidebar from "./Sidebar/Sidebar";
 import Card from "./components/Card";
 import Cart from "./cart/Cart";
+import Home from "./Home/Home.jsx";
 import "./index.css";
 import { ProdProvider } from "./context/ProdContext";
 
@@ -91,10 +92,11 @@ function App() {
   return (
 <Router>
       <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<AdminLogin />} />
+        <Route path="/home" element={<Home />} />
         <Route
           path="/product"
           element={
