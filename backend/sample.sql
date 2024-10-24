@@ -22,3 +22,8 @@ INSERT INTO products (img, title, reviews, prev_price, new_price, company, color
 ('https://d1x8vd8pvkt0tz.cloudfront.net/762502/L.jpg', 'Black Sweatshirt', '(15 reviews)', '₹5000', 400, 'NYC', 'black', 'tshirts'),
 ('https://d1x8vd8pvkt0tz.cloudfront.net/1679781/L.jpg', 'Blue Sweatshirt', '(1 reviews)', '₹1000', 100, 'NYC', 'blue', 'tshirts'),
 ('https://d1x8vd8pvkt0tz.cloudfront.net/1676150/L.jpg', 'Multicolor Trousers', '(10 reviews)', '₹2000', 250, 'LenFlash', 'blue', 'jeans');
+('https://imagescdn.thecollective.in/img/app/product/9/918791-11498220.jpg?w=500&auto=format', 'Men Blue Casual Shirt', '(12 reviews)', '₹2000', 200, 'TC', 'blue', 'shirts');
+('https://yaya.eu/cdn/shop/files/black-faux-leather-trousers-with-wide-legs-moon-rock-dark-sand_6cf37aaa-1d3b-4286-bd6e-940497216b94.jpg?v=1729252052&width=1440', 'Cream Mens Trousers', '(18 reviews)', '₹2500', 300, 'YAYA', 'cream', 'trousers');
+('https://assets.ajio.com/medias/sys_master/root/20240812/BUsR/66ba1ed21d763220fa72fac5/-473Wx593H-442600251-indigo-MODEL6.jpg', 'Blue Linen Mens Trousers', '(8 reviews)', '₹1200', 300, 'AJIO', 'blue', 'trousers');
+('https://www.ubuy.com.eg/productimg/?image=aHR0cHM6Ly9pbWFnZXMtbmEuc3NsLWltYWdlcy1hbWF6b24uY29tL2ltYWdlcy9JLzkxSDh0YXo5NSUyQkwuX1NTNDAwXy5qcGc.jpg', 'Mens Slim Fit', '(28 reviews)', '₹2200', 500, 'Lacoste', 'blue', 'shirts');
+('https://www.arcprint.in/assets/media/products_common_imgs/sports-t-shirts/sports-t-shirt-round/white/1.jpg', 'Custom Printed Sports Tshirt', '(2 reviews)', '₹1500', 200, 'ARC Print', 'grey', 'tshirts');
