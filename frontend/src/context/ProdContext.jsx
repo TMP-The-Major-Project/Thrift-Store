@@ -23,7 +23,9 @@ export const ProdProvider = ({ children }) => {
   // Remove item from cart
   const removeFromCart = async (productId) => {
     try {
+      console.log(`Attempting to remove product with ID: ${productId}`);
       const response = await axios.delete(`http://localhost:3001/cart/remove/${productId}`);
+      console.log('Response from server:', response.data);
       setCart(response.data.cart); // Update cart after removal
     } catch (error) {
       console.error("Error removing product from cart:", error);
@@ -67,7 +69,7 @@ export const ProdProvider = ({ children }) => {
     try {
       const response = await axios.delete("http://localhost:3001/cart/clear");
       setCart([]); // Empty the cart
-      console.log(response)
+      console.log('Cart cleared:', response.data);
     } catch (error) {
       console.error("Error clearing cart:", error);
     }
