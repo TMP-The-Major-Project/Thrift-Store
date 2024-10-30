@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
   frontend:
     build:
@@ -6,7 +8,16 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - REACT_APP_API_URL=http://backend:3999  # Points to the backend service in Docker
+      - REACT_APP_API_URL=http://backend:3001  # Updated to reflect the backend service URL
     volumes:
       - ./frontend:/app
       - /app/node_modules
+
+  backend:
+    build:
+      context: ./backend  # Assuming your Go backend Dockerfile is in the ./backend directory
+      dockerfile: Dockerfile  # Update if your Dockerfile has a different name
+    ports:
+      - "3001:3001"  # Expose the port your Go application listens on
+    volumes:
+      - ./backend:/app  # Mount the backend code into the container for easy development
