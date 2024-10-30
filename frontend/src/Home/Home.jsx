@@ -1,8 +1,6 @@
 import React from 'react';
 import './Home.css'; // Assuming the CSS file is named store.css and is located in the same folder
 import { useState } from 'react';
-import { AiOutlineShoppingCart} from "react-icons/ai";
-import { Link} from "react-router-dom";
 
 const Home = () => {
   const [menuOpen, setMenuOpen] = useState(false);
