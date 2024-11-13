@@ -26,7 +26,7 @@ const Home = () => {
 
                 {/* <li><a href="/about">About</a></li>
                 <li><a href="/contact">Contact</a></li> */}
-                
+
 
               </ul>
             </nav>
@@ -78,7 +78,7 @@ const Home = () => {
               <p>Exclusively Available on The Thrift Project</p>
               <h1>Thrift Your Clothes Now!</h1>
               <small>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse, sapiente accusamus!</small>
-              <a href="/sell" className="btn">Sell Now &#8594;</a>
+              <a href="https://forms.gle/WU7N8vofL9jZ88Yg7" className="btn">Sell Now &#8594;</a>
             </div>
           </div>
         </div>

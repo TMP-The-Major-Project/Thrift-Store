@@ -4,12 +4,14 @@ import numpy as np
 from scipy.sparse import csr_matrix
 from sklearn.neighbors import NearestNeighbors
 from sklearn.model_selection import train_test_split
+from flask_cors import CORS  # Import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 # Load and prepare data (same as before)
 data = pd.read_csv('../data/ratings_Beauty.csv')
-data = data.sample(frac=0.2, random_state=42)  # Use 20% of the data
+data = data.sample(frac=0.5, random_state=42)  # Use 20% of the data
 
 data.columns = ['user_id', 'item_id', 'rating', 'timestamp']
 data.dropna(subset=['user_id', 'item_id'], inplace=True)
@@ -62,7 +64,7 @@ def recommend_products(user_id, train_matrix, model_knn, num_recommendations=5):
 
         top_items = np.argsort(weighted_scores)[-num_recommendations:][::-1]
         return train_matrix.columns[top_items]
-    
+
     except KeyError:
         return []
 
@@ -70,7 +72,7 @@ def recommend_products(user_id, train_matrix, model_knn, num_recommendations=5):
 def get_recommendations():
     # Get the user_id from the query parameters
     user_id = request.args.get('user_id')
-    
+
     if not user_id:
         return jsonify({'error': 'User ID is required'}), 400
 
