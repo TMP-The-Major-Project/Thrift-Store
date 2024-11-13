@@ -1,0 +1,83 @@
+/* RecommendedProducts.css */
+
+.recommended-products {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 20rem;
+  margin-top: 2rem;
+  z-index: -2;
+}
+
+.recommended-products-list {
+  margin-top: 1rem;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.recommended-product-item {
+  position: relative;
+  width: 10rem;
+  text-align: center;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 15px;
+  padding: 10px
+}
+
+.recommended-product-image {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+  border-radius: 15px;
+}
+
+.recommended-product-item:hover .recommended-product-image {
+  transform: scale(1.1); /* Scale the image on hover */
+}
+
+.product-hover-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Dark overlay */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.recommended-product-item:hover .product-hover-info {
+  opacity: 1;
+}
+
+.recommended-product-title {
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+.recommended-product-price {
+  color: #fff;
+  margin: 5px 0;
+}
+
+.add-to-cart-button {
+  background-color: rgb(19, 19, 19);
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9em;
+  border-radius: 15px;
+  border: 2px solid rgb(19, 19, 19);
+}

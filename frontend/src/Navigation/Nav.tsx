@@ -37,7 +37,7 @@ const Nav = ({ handleInputChange, query, username, setUsername }) => {
               type="text"
               onChange={handleInputChange}
               value={query}
-              placeholder={"Hello " + username + "!"}
+              placeholder={"Search"}
             />
           )}
         </div>

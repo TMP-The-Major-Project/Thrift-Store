@@ -18,12 +18,14 @@ import Cart from "./cart/Cart";
 import Home from "./Home/Home.jsx";
 import "./index.css";
 import { ProdProvider } from "./context/ProdContext";
+import RecommendedProducts from "./Recomendations/reco.jsx";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [products, setProducts] = useState([]);
   const [query, setQuery] = useState("");
   const [username, setUsername] = useState("");
+  const [userID, setUserID] = useState("");
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -36,7 +38,8 @@ function App() {
 
   const handleInputChange = (event) => setQuery(event.target.value);
   const filteredItems = products.filter(
-    (product) => product.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
+    (product) =>
+      product.title.toLowerCase().indexOf(query.toLowerCase()) !== -1,
   );
 
   const handleChange = (event) => setSelectedCategory(event.target.value);
@@ -52,7 +55,7 @@ function App() {
           color === selected ||
           company === selected ||
           newPrice === selected ||
-          title === selected
+          title === selected,
       );
     }
 
@@ -67,7 +70,7 @@ function App() {
           prevPrice={prevPrice}
           newPrice={newPrice}
         />
-      )
+      ),
     );
   }
 
@@ -85,12 +88,13 @@ function App() {
         setUsername("");
       } else {
         setUsername(content.username);
+        setUserID(content.id);
       }
     })();
   }, []);
 
   return (
-<Router>
+    <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/sign-up" element={<SignUp />} />
@@ -101,21 +105,22 @@ function App() {
           path="/product"
           element={
             <ProdProvider>
-            <>
-              <Sidebar handleChange={handleChange} />
-              <Navigation
-                query={query}
-                handleInputChange={handleInputChange}
-                username={username}
-                setUsername={setUsername}
-              />
-              <Recommended handleClick={handleClick} />
-              <Products result={result} />
-            </>
+              <>
+                <Sidebar handleChange={handleChange} />
+                <Navigation
+                  query={query}
+                  handleInputChange={handleInputChange}
+                  username={username}
+                  setUsername={setUsername}
+                />
+                <RecommendedProducts userId={userID} username={username} />
+                <Recommended handleClick={handleClick} />
+                <Products result={result} />
+              </>
             </ProdProvider>
           }
         />
-        
+
         {/* Wrap the Cart route with ProdProvider */}
         <Route
           path="/cart"
@@ -124,12 +129,14 @@ function App() {
               <>
                 <Navigation username={username} />
                 <Cart result={products} />
+                <RecommendedProducts userId={userID} username={username} />
               </>
             </ProdProvider>
           }
         />
       </Routes>
-    </Router>  );
+    </Router>
+  );
 }
 
 export default App;
