@@ -15,6 +15,22 @@ func GetProducts(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(products)
 }
 
+func GetProductByID(c *fiber.Ctx) error {
+	productID := c.Params("id")
+	if productID == "" {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Product ID is required"})
+	}
+
+	db := database.Connect()
+
+	var product models.Product
+	if err := db.First(&product, productID).Error; err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "Product not found"})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(product)
+}
+
 func CreateProduct(c *fiber.Ctx) error {
 	product := new(models.Product)
 	if err := c.BodyParser(product); err != nil {
