@@ -1,4 +1,4 @@
-!pip install pymongo pandas scikit-learn numpy
+#pip install pymongo pandas scikit-learn numpy
 
 import pandas as pd
 from pymongo import MongoClient
