@@ -44,7 +44,7 @@ const Cart = () => {
   </button>
   <button className="checkout-button" onClick={() => clearCart()}>
     Clear Cart
-  </button>  
+  </button>
         </p>
 </div>
 

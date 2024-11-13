@@ -12,10 +12,10 @@ func Routes(app *fiber.App) {
 	app.Get("/user", controllers.User)
 	app.Post("/logout", controllers.Logout)
 
-	app.Post("/admin-register", controllers.AdminRegister)
-	app.Post("/admin-login", controllers.AdminLogin)
-	app.Post("/add-products", controllers.CreateProduct)
-	app.Get("/products", controllers.GetProducts)
+	app.Get("/products", controllers.GetProducts)          // Retrieve a list of products
+	app.Post("/products/add", controllers.CreateProduct)   // Create a new product
+	app.Delete("/products/:id", controllers.DeleteProduct) // Delete a product by ID
+	app.Put("/products/:id", controllers.UpdateProduct)    // Update a product by ID
 
 	app.Post("/cart/add", controllers.AddToCart)               // Add item to cart
 	app.Delete("/cart/delete/:id", controllers.RemoveFromCart) // Remove item from cart by ID

@@ -1,0 +1,141 @@
+.admin-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.admin-title {
+  font-size: 36px;
+  color: #333;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.empty-admin-message {
+  font-size: 24px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.admin-item {
+  width: 700px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  margin: 30px;
+  background-color: white;
+  overflow: hidden;
+}
+
+.admin-item-image {
+  width: 200px;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px 0 0 15px;
+}
+
+.admin-item-description {
+  padding: 20px;
+  width: 100%;
+  color: #333;
+}
+
+.admin-item-title,
+.admin-item-price {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.admin-item-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.remove-from-admin-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.remove-from-admin-button:hover {
+  background-color: #a71d2a;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 40%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.close {
+  color: #aaa;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+input, label {
+  margin-top: 10px;
+  width: 100%;
+}
+
+input {
+  padding: 8px;
+  margin-top: 5px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+}
+
+input:focus {
+  border-color: #007bff;
+}
+
+button[type="submit"] {
+  margin-top: 20px;
+  width: 100%;
+}
