@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import SignUp from "./Valdiate/SignUp.tsx";
 import Login from "./Valdiate/Login.tsx";
-import AdminLogin from "./Valdiate/AdminLogin.tsx";
 import Navigation from "./Navigation/Nav.tsx";
 import Products from "./Products/Products";
 import { fetchData } from "./db/data"; // Import fetch function
@@ -19,6 +18,7 @@ import Home from "./Home/Home.jsx";
 import "./index.css";
 import { ProdProvider } from "./context/ProdContext";
 import RecommendedProducts from "./Recomendations/reco.jsx";
+import AdminDash from "./Admin/AdminDash.jsx";
 
 function App() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -99,8 +99,11 @@ function App() {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/admin" element={<AdminLogin />} />
         <Route path="/home" element={<Home />} />
+        <Route
+          path="/admin-dashboard"
+          element={<AdminDash products={products} />}
+        />
         <Route
           path="/product"
           element={
@@ -128,7 +131,7 @@ function App() {
             <ProdProvider>
               <>
                 <Navigation username={username} />
-                <Cart result={products} />
+                <Cart />
                 <RecommendedProducts userId={userID} username={username} />
               </>
             </ProdProvider>
