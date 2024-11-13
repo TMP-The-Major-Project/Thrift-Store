@@ -17,6 +17,8 @@
   nav {
     flex: 1;
     text-align: right;
+    font-size: 24px;
+    border-bottom: 0px;
   }
   
   nav ul {
@@ -29,6 +31,8 @@
     margin-right: 20px;
   }
   
+
+
   a {
     text-decoration: none;
     color: #555;
@@ -38,6 +42,11 @@
     color: #555;
   }
   
+  .navmenu {
+    margin-right: 20px;
+  }
+
+
   .container {
     max-width: 1300px;
     margin: auto;
@@ -55,6 +64,7 @@
   .col-2 {
     flex-basis: 50%;
     min-width: 300px;
+    padding-left: 70px;
   }
   
   .col-2 img {
