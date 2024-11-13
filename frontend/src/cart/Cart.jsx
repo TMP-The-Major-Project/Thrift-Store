@@ -4,7 +4,14 @@ import { useLocation } from "react-router-dom";
 import "./Cart.css";
 
 const Cart = () => {
-  const { cart, removeFromCart, updateQuantity, fetchCart, fetchCartTotal, clearCart } = useContext(ProdContext);
+  const {
+    cart,
+    removeFromCart,
+    updateQuantity,
+    fetchCart,
+    fetchCartTotal,
+    clearCart,
+  } = useContext(ProdContext);
   const [total, setTotal] = useState(0);
   const location = useLocation();
 
@@ -15,7 +22,12 @@ const Cart = () => {
       setTotal(cartTotal);
     };
     getTotal();
-  }, [location.pathname]); // Empty dependency array ensures this runs only once on mount
+  }, [location.pathname]);
+
+  // Handle checkout button click
+  const handleCheckout = () => {
+    window.location.href = "https://rzp.io/rzp/vaefyg6N"; // Redirect to Razorpay URL
+  };
 
   return (
     <div className="cart-container">
@@ -26,28 +38,39 @@ const Cart = () => {
         <>
           {cart.map((item) => (
             <div className="cart-item" key={item.id}>
-              <img className="cart-item-image" src={item.img} alt={item.title} />
+              <img
+                className="cart-item-image"
+                src={item.img}
+                alt={item.title}
+              />
               <div className="cart-item-description">
                 <h3 className="cart-item-title">{item.title}</h3>
                 <p className="cart-item-price">₹{item.total_price}</p>
                 <div className="cart-item-actions">
-                  <button className="remove-from-cart-button" onClick={() => removeFromCart(item.id)}>Remove</button>
+                  <button
+                    className="remove-from-cart-button"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    Remove
+                  </button>
                 </div>
               </div>
             </div>
           ))}
-<div className="checkout-section">
-        <p>
-  <h3 className="total-price">Total: ₹{total}</h3>
-  <button className="checkout-button" onClick={() => alert("Proceeding to checkout")}>
-    Checkout
-  </button>
-  <button className="checkout-button" onClick={() => clearCart()}>
-    Clear Cart
-  </button>
-        </p>
-</div>
-
+          <div className="checkout-section">
+            <p>
+              <h3 className="total-price">Total: ₹{total}</h3>
+              <button
+                className="checkout-button"
+                onClick={handleCheckout} // Call handleCheckout to redirect
+              >
+                Checkout
+              </button>
+              <button className="checkout-button" onClick={() => clearCart()}>
+                Clear Cart
+              </button>
+            </p>
+          </div>
         </>
       )}
     </div>
