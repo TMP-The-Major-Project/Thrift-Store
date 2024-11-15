@@ -102,7 +102,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route
           path="/admin-dashboard"
-          element={<AdminDash products={products} />}
+          element={<AdminDash user={username} />}
         />
         <Route
           path="/product"

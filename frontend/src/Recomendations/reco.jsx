@@ -11,7 +11,7 @@ const RecommendedProducts = ({ userId, username }) => {
   const { addToCart } = useContext(ProdContext); // Get addToCart function from context
 
   const handleButtonClick = (id) => {
-      addToCart(id); // Add item to cart
+    addToCart(id); // Add item to cart
   };
 
   // Fetch product recommendations for the specific user
