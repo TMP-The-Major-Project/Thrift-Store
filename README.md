@@ -48,7 +48,7 @@ You can read the complete Contributing Guide here - [file](.github/CONTRIBUTING.
 - **Frontend**: React, React Router, Axios, CSS  
 - **Backend**: Go (Fiber framework), MongoDB/PostgreSQL  
 - **Machine Learning**: Python (Pandas, Scikit-learn) for product recommendations  
-- **Deployment**: Docker, Heroku (or any other cloud platform)  
+- **Deployment**: Docker, Jenkins and Cloudflare  
 
 
 ## Getting Started
