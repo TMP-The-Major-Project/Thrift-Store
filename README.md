@@ -1,17 +1,154 @@
-# A Store to Recreation
-## Work in Progress 👷
-## Collaborators: 
-- Nisarg Khodke - ![Nisarg Khodke](https://github.com/Nisarg2061)
-- Niraj Lalani - ![Niraj Lalani](https://github.com/nirajlalani)
-- Jayesh Thakkar - ![Jayesh Thakkar](https://github.com/jayeshthakkar)
-- Ria Chawak - ![Ria Chawak](https://github.com/Ria1424)
+# The Thrift Project
+
+Welcome to The Thrift Project! This is a web application designed to provide users with a platform to buy and sell thrifted clothing and accessories. The application features user authentication, product recommendations, a shopping cart, and an admin dashboard for managing products.
+
+## Table of Contents
+
+1. [Table of Contents](#table-of-contents)
+2. [Usage](#usage)  
+3. [Contribution](#contribution)  
+4. [License](#license)  
+5. [Features](#features)  
+6. [Technologies Used](#technologies-used)  
+7. [Getting Started](#getting-started)  
+    - [Prerequisites](#prerequisites)  
+    - [Installation](#installation)  
+8. [API Endpoints](#api-endpoints)  
+    - [Authentication](#authentication)  
+    - [Products](#products)  
+    - [Cart](#cart)  
+
+## Usage
+
+- Create an account or log in to access the features.
+- Browse through the products and add items to your cart.
+- Proceed to checkout to complete your purchase.
+- Admin users can manage products through the admin dashboard.
+
+## Contribution
+Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss improvements or bugs.
+You can read the complete Contributing Guide here - [file](.github/CONTRIBUTING.md)
+
+## License
+ [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE)
 
 
-## Code of Conduct
-[You can read the complete Code of Conduct here](.github/CODE_OF_CONDUCT.md)
-<br/>
-## Contributing Guide
-[You can read the complete Contributing Guide here](.github/CONTRIBUTING.md)
-<br/>
-## Security Policy
-[You can read the complete Security Policy here](.github/SECURITY.md)
+## Features
+
+- **User Authentication**: Users can register, log in, and log out.  
+- **Product Listings**: Browse and search through a variety of thrifted products.  
+- **Shopping Cart**: Add products to a cart and proceed to checkout.  
+- **Product Recommendations**: Personalized product recommendations based on user behavior.  
+- **Admin Dashboard**: Admins can add, edit, and delete products from the inventory.  
+
+[(Back to top)](#table-of-contents)
+
+## Technologies Used
+
+- **Frontend**: React, React Router, Axios, CSS  
+- **Backend**: Go (Fiber framework), MongoDB/PostgreSQL  
+- **Machine Learning**: Python (Pandas, Scikit-learn) for product recommendations  
+- **Deployment**: Docker, Heroku (or any other cloud platform)  
+
+
+## Getting Started
+
+To get a local copy of the project up and running, follow these steps:
+
+### Prerequisites
+
+Ensure the following tools are installed:  
+- Node.js and npm (for frontend)  
+- Go (for backend)  
+- MongoDB or PostgreSQL (for database)  
+- Python (for recommendation system)  
+- Docker (optional, for containerization)  
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/yourusername/thrift-store.git
+   cd thrift-store
+   ```
+
+2. Set up the backend:
+
+- Navigate to the backend directory and install dependencies:
+
+  ``` bash
+  cd backend
+  go mod tidy
+  ```
+  
+-  Set up your database and update the .env file with your database credentials.
+
+3. Set up the frontend:
+
+- Navigate to the frontend directory and install dependencies:
+
+  ``` bash
+  cd frontend
+  npm install
+  ```
+
+4. Set up ML model:
+
+- Navigate to the model/Recomender folder and setup virtual environment:
+
+  ``` bash
+  cd model/Recomender
+  source venv/bin/activate
+  pip install -r requirements.txt
+  ```
+
+5. Run the applications:
+
+- Start the backend server:
+
+  ``` bash
+  go run main.go
+
+  ```
+- Start the frontend server:
+
+  ``` bash
+  npm start
+
+  ```
+- Start the ML Model server:
+
+  ``` bash
+  python main.py
+
+  ```
+6. Access the application:
+Open your browser and navigate to `http://localhost:3000`
+
+[(Back to top)](#table-of-contents)
+
+## API Endpoints
+
+### Authentication
+
+    POST /login: Log in a user.
+    POST /register: Register a new user.
+    POST /logout: Log out a user.
+
+### Products
+
+    GET /products: Retrieve all products.
+    GET /products/:id: Retrieve a product by ID.
+    POST /products/add: Add a new product.
+    PUT /products/:id: Update a product by ID.
+    DELETE /products/:id: Delete a product by ID.
+
+### Cart
+
+    POST /cart/add: Add an item to the cart.
+    DELETE /cart/delete/:id: Remove an item from the cart.
+    GET /cart/items: Get all items in the cart.
+    GET /cart/total: Get the total price of items in the cart.
+    DELETE /cart/clear: Clear all items in the cart.
+[(Back to top)](#table-of-contents)
