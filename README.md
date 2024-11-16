@@ -5,20 +5,33 @@ Welcome to The Thrift Project! This is a web application designed to provide use
 ## Table of Contents
 
 1. [Table of Contents](#table-of-contents)
-2. [Features](#features)  
-3. [Technologies Used](#technologies-used)  
-4. [Getting Started](#getting-started)  
+2. [Usage](#usage)  
+3. [Contribution](#contribution)  
+4. [License](#license)  
+5. [Features](#features)  
+6. [Technologies Used](#technologies-used)  
+7. [Getting Started](#getting-started)  
     - [Prerequisites](#prerequisites)  
     - [Installation](#installation)  
-5. [Usage](#usage)  
-6. [API Endpoints](#api-endpoints)  
+8. [API Endpoints](#api-endpoints)  
     - [Authentication](#authentication)  
     - [Products](#products)  
     - [Cart](#cart)  
-7. [Contributing](#contributing)  
-8. [License](#license)  
 
----
+## Usage
+
+- Create an account or log in to access the features.
+- Browse through the products and add items to your cart.
+- Proceed to checkout to complete your purchase.
+- Admin users can manage products through the admin dashboard.
+
+## Contribution
+Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss improvements or bugs.
+You can read the complete Contributing Guide here - [file](.github/CONTRIBUTING.md)
+
+## License
+ [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE)
+
 
 ## Features
 
@@ -28,7 +41,7 @@ Welcome to The Thrift Project! This is a web application designed to provide use
 - **Product Recommendations**: Personalized product recommendations based on user behavior.  
 - **Admin Dashboard**: Admins can add, edit, and delete products from the inventory.  
 
----
+[(Back to top)](#table-of-contents)
 
 ## Technologies Used
 
@@ -37,7 +50,6 @@ Welcome to The Thrift Project! This is a web application designed to provide use
 - **Machine Learning**: Python (Pandas, Scikit-learn) for product recommendations  
 - **Deployment**: Docker, Heroku (or any other cloud platform)  
 
----
 
 ## Getting Started
 
@@ -114,14 +126,10 @@ Ensure the following tools are installed:
 6. Access the application:
 Open your browser and navigate to `http://localhost:3000`
 
-## Usage
+[(Back to top)](#table-of-contents)
 
-    Create an account or log in to access the features.
-    Browse through the products and add items to your cart.
-    Proceed to checkout to complete your purchase.
-    Admin users can manage products through the admin dashboard.
----
 ## API Endpoints
+
 ### Authentication
 
     POST /login: Log in a user.
@@ -143,14 +151,4 @@ Open your browser and navigate to `http://localhost:3000`
     GET /cart/items: Get all items in the cart.
     GET /cart/total: Get the total price of items in the cart.
     DELETE /cart/clear: Clear all items in the cart.
----
-
-## Contribution
-Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss improvements or bugs.
-You can read the complete Contributing Guide here - [Contribution Guide](.github/CONTRIBUTING.md)
-
----
-
-## License
-
-This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.
+[(Back to top)](#table-of-contents)
