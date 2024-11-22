@@ -1,7 +1,9 @@
 # The Thrift Project
 
 Welcome to The Thrift Project! This is a web application designed to provide users with a platform to buy and sell thrifted clothing and accessories. The application features user authentication, product recommendations, a shopping cart, and an admin dashboard for managing products.
+
 ---
+
 ## Table of Contents
 
 1. [Table of Contents](#table-of-contents)
@@ -17,21 +19,29 @@ Welcome to The Thrift Project! This is a web application designed to provide use
     - [Authentication](#authentication)  
     - [Products](#products)  
     - [Cart](#cart)  
+
 ---
+
 ## Usage
 
 - Create an account or log in to access the features.
 - Browse through the products and add items to your cart.
 - Proceed to checkout to complete your purchase.
 - Admin users can manage products through the admin dashboard.
+
 ---
+
 ## Contribution
 Contributions are welcome! Please feel free to submit a pull request or open an issue to discuss improvements or bugs.
 You can read the complete Contributing Guide here - [file](.github/CONTRIBUTING.md)
+
 ---
+
 ## License
  [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](LICENSE)
+
 ---
+
 ## Features
 
 - **User Authentication**: Users can register, log in, and log out.  
@@ -41,14 +51,18 @@ You can read the complete Contributing Guide here - [file](.github/CONTRIBUTING.
 - **Admin Dashboard**: Admins can add, edit, and delete products from the inventory.  
 
 [(Back to top)](#table-of-contents)
+
 ---
+
 ## Technologies Used
 
 - **Frontend**: React, React Router, Axios, CSS  
 - **Backend**: Go (Fiber framework), MongoDB/PostgreSQL  
 - **Machine Learning**: Python (Pandas, Scikit-learn) for product recommendations  
 - **Deployment**: Docker, Jenkins and Cloudflare  
+
 ---
+
 ## Getting Started
 
 To get a local copy of the project up and running, follow these steps:
@@ -125,7 +139,9 @@ Ensure the following tools are installed:
 Open your browser and navigate to `http://localhost:3000`
 
 [(Back to top)](#table-of-contents)
+
 ---
+
 ## API Endpoints
 
 ### Authentication
