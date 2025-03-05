@@ -2,6 +2,7 @@
 
 Welcome to The Thrift Project! This is a web application designed to provide users with a platform to buy and sell thrifted clothing and accessories. The application features user authentication, product recommendations, a shopping cart, and an admin dashboard for managing products.
 
+
 ---
 
 ## Table of Contents
