@@ -1,7 +1,234 @@
 .price-title {
-  margin-top: 20px;
+  font-size: 1.2rem;
+  color: #1c1f3b;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 0.5rem;
 }
 
-.ml {
-  margin-left: 20px;
+.price-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(to right, #1c1f3b, #6d8299);
+  border-radius: 2px;
+}
+
+/* Price range container */
+.price-range {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Price range item */
+.price-item {
+  display: flex;
+  align-items: center;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  background: #f8f9fa;
+  border: 1px solid transparent;
+}
+
+.price-item:hover {
+  background: #f0f2f5;
+  transform: translateX(5px);
+}
+
+.price-item.selected {
+  background: linear-gradient(to right, rgba(28, 31, 59, 0.1), rgba(109, 130, 153, 0.1));
+  border-color: #1c1f3b;
+}
+
+/* Radio button styling */
+.price-item input[type="radio"] {
+  display: none;
+}
+
+.price-item label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  width: 100%;
+  color: #1c1f3b;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.price-item label::before {
+  content: '';
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #6d8299;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  position: relative;
+  background: white;
+}
+
+.price-item label::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #1c1f3b;
+  border-radius: 50%;
+  top: 50%;
+  left: 4px;
+  transform: translateY(-50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.price-item input[type="radio"]:checked + label::before {
+  border-color: #1c1f3b;
+  background: white;
+}
+
+.price-item input[type="radio"]:checked + label::after {
+  transform: translateY(-50%) scale(1);
+}
+
+.price-item input[type="radio"]:checked + label {
+  color: #1c1f3b;
+  font-weight: 500;
+}
+
+/* Price range display */
+.price-range-display {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.price-range-display p {
+  margin: 0;
+  color: #1c1f3b;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-range-display span {
+  color: #6d8299;
+  font-weight: 500;
+}
+
+/* Animation for price items */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.price-item {
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+.price-item:nth-child(1) { animation-delay: 0.1s; }
+.price-item:nth-child(2) { animation-delay: 0.2s; }
+.price-item:nth-child(3) { animation-delay: 0.3s; }
+.price-item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .price-title {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .price-item {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .price-item label {
+    font-size: 0.9rem;
+  }
+
+  .price-item label::before {
+    width: 16px;
+    height: 16px;
+  }
+
+  .price-item label::after {
+    width: 8px;
+    height: 8px;
+    left: 3px;
+  }
+
+  .price-range-display {
+    padding: 0.8rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .price-title {
+    color: #fff;
+  }
+
+  .price-item {
+    background: #2a2f4f;
+  }
+
+  .price-item:hover {
+    background: #3a3f5f;
+  }
+
+  .price-item.selected {
+    background: linear-gradient(to right, rgba(109, 130, 153, 0.1), rgba(28, 31, 59, 0.1));
+    border-color: #6d8299;
+  }
+
+  .price-item label {
+    color: #fff;
+  }
+
+  .price-item label::before {
+    background: #2a2f4f;
+    border-color: #6d8299;
+  }
+
+  .price-item input[type="radio"]:checked + label::before {
+    border-color: #6d8299;
+    background: #2a2f4f;
+  }
+
+  .price-item input[type="radio"]:checked + label::after {
+    background: #6d8299;
+  }
+
+  .price-item input[type="radio"]:checked + label {
+    color: #fff;
+  }
+
+  .price-range-display {
+    background: #2a2f4f;
+    border-color: #3a3f5f;
+  }
+
+  .price-range-display p {
+    color: #fff;
+  }
+
+  .price-range-display span {
+    color: #a0a8b8;
+  }
 }

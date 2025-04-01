@@ -130,7 +130,6 @@ function App() {
           element={
             <ProdProvider>
               <>
-                <Navigation username={username} />
                 <Cart />
                 <RecommendedProducts userId={userID} username={username} />
               </>

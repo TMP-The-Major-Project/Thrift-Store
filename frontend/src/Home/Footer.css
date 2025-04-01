@@ -1,0 +1,124 @@
+.footer {
+  background: linear-gradient(135deg, #1B4D3E 0%, #2A7B6C 100%);
+  color: #ffffff;
+  padding: 4rem 0 2rem;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.footer-section h3 {
+  color: #ffffff;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.footer-section h4 {
+  color: #3498DB;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-section p {
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: #ffffff;
+}
+
+.footer-section .contact-info {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.footer-section .contact-info p {
+  margin-bottom: 0.8rem;
+}
+
+.footer-section .contact-info i {
+  margin-right: 0.5rem;
+  color: #ffffff;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 2rem;
+  margin-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .footer-section .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background: linear-gradient(135deg, #0A1F18 0%, #1B4D3E 100%);
+  }
+
+  .footer-section h3 {
+    color: #E8F5F2;
+  }
+
+  .footer-section h4 {
+    color: #2980b9;
+  }
+
+  .footer-section p,
+  .footer-section ul li a,
+  .footer-section .contact-info {
+    color: #A8C5BE;
+  }
+
+  .footer-section ul li a:hover {
+    color: #E8F5F2;
+  }
+
+  .footer-section .contact-info i {
+    color: #E8F5F2;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(232, 245, 242, 0.1);
+    color: #A8C5BE;
+  }
+} 

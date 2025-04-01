@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./ProductForm.css";
 
 const ProductForm = ({ existingProduct = {}, updateCallback }) => {
   const [title, setTitle] = useState(existingProduct.title || "");
@@ -43,40 +44,110 @@ const ProductForm = ({ existingProduct = {}, updateCallback }) => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+    <form onSubmit={onSubmit} className="product-form">
+      <h2 className="form-title">{updating ? "Update Product" : "Add New Product"}</h2>
+      
+      <div className="form-group">
+        <label htmlFor="title">Title</label>
+        <input
+          type="text"
+          id="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="Enter product title"
+          required
+        />
       </div>
-      <div>
-        <label htmlFor="img">Image URL:</label>
-        <input type="text" id="img" value={img} onChange={(e) => setImg(e.target.value)} />
+
+      <div className="form-group">
+        <label htmlFor="img">Image URL</label>
+        <input
+          type="text"
+          id="img"
+          value={img}
+          onChange={(e) => setImg(e.target.value)}
+          placeholder="Enter image URL"
+          required
+        />
       </div>
-      <div>
-        <label htmlFor="reviews">Reviews:</label>
-        <input type="text" id="reviews" value={reviews} onChange={(e) => setReviews(e.target.value)} />
+
+      <div className="form-group">
+        <label htmlFor="reviews">Reviews</label>
+        <input
+          type="text"
+          id="reviews"
+          value={reviews}
+          onChange={(e) => setReviews(e.target.value)}
+          placeholder="Enter product reviews"
+          required
+        />
       </div>
-      <div>
-        <label htmlFor="prevPrice">Previous Price:</label>
-        <input type="text" id="prevPrice" value={prevPrice} onChange={(e) => setPrevPrice(e.target.value)} />
+
+      <div className="form-group">
+        <label htmlFor="prevPrice">Previous Price</label>
+        <input
+          type="text"
+          id="prevPrice"
+          value={prevPrice}
+          onChange={(e) => setPrevPrice(e.target.value)}
+          placeholder="Enter previous price"
+          required
+        />
       </div>
-      <div>
-        <label htmlFor="newPrice">New Price:</label>
-        <input type="number" id="newPrice" value={newPrice} onChange={(e) => setNewPrice(e.target.value)} />
+
+      <div className="form-group">
+        <label htmlFor="newPrice">New Price</label>
+        <input
+          type="number"
+          id="newPrice"
+          value={newPrice}
+          onChange={(e) => setNewPrice(e.target.value)}
+          placeholder="Enter new price"
+          required
+          min="0"
+          step="0.01"
+        />
       </div>
-      <div>
-        <label htmlFor="company">Company:</label>
-        <input type="text" id="company" value={company} onChange={(e) => setCompany(e.target.value)} />
+
+      <div className="form-group">
+        <label htmlFor="company">Company</label>
+        <input
+          type="text"
+          id="company"
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
+          placeholder="Enter company name"
+          required
+        />
       </div>
-      <div>
-        <label htmlFor="color">Color:</label>
-        <input type="text" id="color" value={color} onChange={(e) => setColor(e.target.value)} />
+
+      <div className="form-group">
+        <label htmlFor="color">Color</label>
+        <input
+          type="text"
+          id="color"
+          value={color}
+          onChange={(e) => setColor(e.target.value)}
+          placeholder="Enter product color"
+          required
+        />
       </div>
-      <div>
-        <label htmlFor="category">Category:</label>
-        <input type="text" id="category" value={category} onChange={(e) => setCategory(e.target.value)} />
+
+      <div className="form-group">
+        <label htmlFor="category">Category</label>
+        <input
+          type="text"
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          placeholder="Enter product category"
+          required
+        />
       </div>
-      <button type="submit">{updating ? "Update Product" : "Add Product"}</button>
+
+      <button type="submit" className="submit-button">
+        {updating ? "Update Product" : "Add Product"}
+      </button>
     </form>
   );
 };
