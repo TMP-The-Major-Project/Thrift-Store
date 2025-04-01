@@ -1,26 +1,135 @@
 nav {
   display: flex;
-  border-bottom: 2px solid #f3f3f3;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  z-index: 999;
-  margin-left: 2rem;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 10px rgba(27, 77, 62, 0.1);
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 998;
+  height: 70px;
+  transition: all 0.3s ease;
+  margin-left: 250px;
+}
+
+.nav-container {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 2rem;
+  position: relative;
 }
 
 input {
-  padding: 12px 20px;
-  border: none;
-  background: #f7f6f6;
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #e8f5e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+input:focus {
   outline: none;
-  margin-right: 20px;
-  border-radius: 5px;
-  position: relative;
-  width: 14rem;
+  border-color: #1B4D3E;
+  box-shadow: 0 0 0 3px rgba(27, 77, 62, 0.1);
+  background: white;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .nav-icons {
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #1B4D3E;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border: 2px solid transparent;
+}
+
+.nav-icons:hover {
+  color: #2E7D32;
+  background: #e8f5e9;
+  transform: translateY(-2px);
+  border-color: #1B4D3E;
+}
+
+.nav-icons svg {
   width: 1.5rem;
   height: 1.5rem;
-  margin-left: 2rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  nav {
+    left: 0;
+    padding: 1rem;
+    height: 60px;
+  }
+
+  .nav-container {
+    margin: 0 1rem;
+    max-width: 300px;
+  }
+
+  input {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .profile-container {
+    gap: 0.5rem;
+  }
+
+  .nav-icons {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  .nav-icons svg {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  nav {
+    background: #1B4D3E;
+  }
+
+  input {
+    background: #2a3f3a;
+    border-color: #3a5f4a;
+    color: white;
+  }
+
+  input:focus {
+    background: #2a3f3a;
+    border-color: #4CAF50;
+  }
+
+  .nav-icons {
+    color: #fff;
+    background: #2a3f3a;
+  }
+
+  .nav-icons:hover {
+    background: #3a5f4a;
+    color: #4CAF50;
+    border-color: #4CAF50;
+  }
 }

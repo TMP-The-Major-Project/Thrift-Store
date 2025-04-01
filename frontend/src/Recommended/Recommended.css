@@ -1,11 +1,59 @@
 .recommended-flex {
   display: flex;
-  margin-left: 20rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 0 1rem;
+  margin-left: 250px; /* Match the sidebar width */
+  width: calc(100% - 250px); /* Take remaining width after sidebar */
 }
 
 .recommended-title {
-  margin-left: 20rem;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  font-size: 20px;
+  color: #1B4D3E;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+  padding: 0 1rem;
+  position: relative;
+  display: inline-block;
+  margin-left: 250px; /* Match the sidebar width */
+}
+
+.recommended-title::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 1rem;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(to right, #1B4D3E, #2A7B6C);
+  border-radius: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .recommended-title {
+    color: #E8F5F2;
+  }
+
+  .recommended-title::after {
+    background: linear-gradient(to right, #2A7B6C, #4CAF50);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .recommended-flex {
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+    padding: 0 0.5rem;
+  }
+
+  .recommended-title {
+    margin-left: 0;
+    font-size: 1.3rem;
+    margin: 1.5rem 0 1rem;
+    padding: 0 0.5rem;
+  }
 }
